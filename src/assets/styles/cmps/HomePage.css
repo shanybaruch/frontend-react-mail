@@ -1,0 +1,16 @@
+.home {
+    color: var(--gray4);
+    height: 70vh;
+    /* padding: 4rem; */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    h1 {
+
+        font-size: 3rem;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+}
