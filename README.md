@@ -1,142 +1,94 @@
-# Coding Academy React Frontend
+# MisterEmail
 
-Modern React application built with Vite, featuring a complete frontend infrastructure for teaching full-stack development.
+A Gmail-inspired email client built with React + Vite.
 
-## 🚀 Quick Start
+## Quick Start
 
-1. Install dependencies:
 ```bash
 npm install
-```
-
-2. Start development server:
-```bash
 npm run dev
 ```
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 src/
-├── assets/
-│   └── styles/        # SCSS modules
-│       ├── basics/    # Core styles
-│       ├── cmps/      # Component styles
-│       ├── pages/     # Page styles
-│       └── setup/     # SCSS variables & mixins
-├── cmps/              # Reusable components
-├── pages/             # Route components
-├── services/          # API and utility services
-└── store/            # Redux state management
-    ├── actions/      # Action creators
-    └── reducers/     # State reducers
+├── assets/styles/cmps/mail/   # Mail app CSS
+├── cmps/
+│   ├── MailSidebar.jsx        # Folder navigation sidebar
+│   ├── MailList.jsx           # Email list
+│   ├── MailPreview.jsx        # Single email row
+│   ├── MailDetails.jsx        # Full email view
+│   └── ComposeModal.jsx       # New message dialog
+├── pages/
+│   └── MailIndex.jsx          # Main app page
+├── services/
+│   └── mail.service.js        # Data layer (localStorage)
+public/img/
+│   ├── mail-logo.png          # App logo (navbar + favicon)
+│   └── mail-logo2.png         # Secondary logo asset
 ```
 
-## 🎨 Components
+## Features
 
-### Core Components
-- `AppHeader` - Navigation and user menu
-- `AppFooter` - Footer with service status
-- `UserMsg` - Toast notifications
-- `CarList` - Grid display of cars with actions
-- `CarFilter` - Search and filter interface
-- `ReviewList` - User reviews with CRUD
+### Layout
+- Fixed header with hamburger menu, logo, search bar, and settings icon
+- Collapsible sidebar — toggle between full (icon + label) and icon-only mode with a smooth transition
+- Email list panel that replaces with a detail view on click
 
-### Pages
-- `CarIndex` - Main car management
-- `ReviewIndex` - Review system
-- `UserDetails` - User profile
-- `AboutUs` - Static content with nested routes
-- `Chat` - Real-time messaging
+### Sidebar
+- Folders: Inbox, Sent, Draft, Trash — each with a react-icons icon
+- Unread count badge on Inbox
+- Compose button opens the compose modal
 
-## 🔄 State Management
+### Email List
+- Unread mails shown in **bold** with white background
+- Read mails shown in regular weight with gray background
+- Hover shows a border outline and a trash delete button
+- Checkboxes for multi-select; bulk delete toolbar appears when mails are selected
 
-Using Redux with the following modules:
-- `carModule` - Car CRUD operations
-- `userModule` - Authentication and user data
-- `reviewModule` - Review system
-- `systemModule` - App-wide settings
+### Email Detail View
+- Back arrow (`IoArrowBackOutline`) and delete button in the toolbar
+- Shows sender avatar (initial letter), sender name, date, and full message body
+- Opening an unread mail marks it as read automatically
 
-### Example Usage
-```jsx
-// In component:
-const cars = useSelector(state => state.carModule.cars)
-const dispatch = useDispatch()
+### Compose Modal
+- Opens in the bottom-right corner (Gmail style)
+- Fields: To, Subject, free-text body
+- Send button saves to the Sent folder
+- Close button or overlay click dismisses it
 
-// Action dispatch:
-dispatch(loadCars())
-```
+### Delete
+- Single delete from list row (hover to reveal trash icon)
+- Single delete from detail view toolbar
+- Bulk delete via the selection toolbar
+- Moves to Trash; deleting from Trash removes permanently
 
-## 🎯 Services
+### Search
+- Search icon (`IoSearchOutline`) on the left of the search bar
+- Filters mails in real time by sender or subject
 
-### REST API Services
-- `car.service` - Car CRUD operations
-- `user.service` - Authentication & user management
-- `review.service` - Review system
-- `upload.service` - File uploads
+### Persistence
+- All changes (read status, deletes, sent mails) are saved to `localStorage` and survive page refresh
+- First load seeds default mails; subsequent loads read from storage
 
-### Utility Services
-- `event-bus.service` - Pub/sub messaging
-- `socket.service` - WebSocket connection
-- `storage.service` - Local storage wrapper
-- `util.service` - Common helpers
+## Icons (react-icons)
 
-## 🎨 Styling
+| Location | Icon |
+|---|---|
+| Hamburger menu | `MdOutlineMenu` |
+| Search | `IoSearchOutline` |
+| Settings | `IoSettingsOutline` |
+| Compose | `LuPencil` |
+| Inbox | `RiInboxFill` |
+| Sent | `RiSendPlane2Line` |
+| Draft | `MdOutlineInsertDriveFile` |
+| Trash | `FaRegTrashAlt` |
+| Back arrow | `IoArrowBackOutline` |
+| Compose close | `IoClose` |
 
-Using SCSS modules with:
-- CSS Grid for layouts
-- Flexbox for component alignment
-- CSS Variables for theming
-- Responsive breakpoints
-- Utility classes
+## Available Scripts
 
-### Example Usage
-```scss
-.car-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: .5em;
-}
-```
-
-## 🚦 Development Guidelines
-
-1. Component Structure
-```jsx
-export function MyComponent({ prop1, prop2 }) {
-    const [state, setState] = useState(null)
-    
-    useEffect(() => {
-        // Side effects here
-    }, [])
-
-    return <section className="my-component">
-        {/* JSX */}
-    </section>
-}
-```
-
-2. State Updates
-```jsx
-// Correct:
-setData(prevData => [...prevData, newItem])
-
-// Avoid:
-setData([...data, newItem])
-```
-
-## 📝 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Production build
-- `npm run preview` - Preview production build
-- `npm run test` - Run tests
-
-
-## 📄 License
-MIT
-
----
-Coding Academy - Built with ❤️ for teaching modern fullstack development
-
-
+- `npm run dev` — Start development server
+- `npm run build` — Production build
+- `npm run preview` — Preview production build
