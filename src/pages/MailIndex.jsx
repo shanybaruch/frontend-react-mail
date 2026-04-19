@@ -37,6 +37,27 @@ export function MailIndex() {
         }
     }
 
+    function onDelete(mail) {
+        if (mail.folder === 'trash') {
+            mailService.remove(mail.id).then(loadMails)
+        } else {
+            mailService.save({ ...mail, folder: 'trash' }).then(loadMails)
+        }
+        setOpenMail(null)
+    }
+
+    function onDeleteSelected() {
+        const selected = mails.filter(m => selectedIds.includes(m.id))
+        Promise.all(
+            selected.map(m =>
+                m.folder === 'trash' ? mailService.remove(m.id) : mailService.save({ ...m, folder: 'trash' })
+            )
+        ).then(() => {
+            setSelectedIds([])
+            loadMails()
+        })
+    }
+
     function onBack() {
         setOpenMail(null)
     }
@@ -96,13 +117,24 @@ export function MailIndex() {
                     collapsed={sidebarCollapsed}
                 />
                 {openMail
-                    ? <MailDetails mail={openMail} onBack={onBack} />
-                    : <MailList
-                        mails={filtered}
-                        selectedIds={selectedIds}
-                        onSelect={onSelect}
-                        onMailClick={onMailClick}
-                    />
+                    ? <MailDetails mail={openMail} onBack={onBack} onDelete={onDelete} />
+                    : <div className="mail-list-container">
+                        {selectedIds.length > 0 && (
+                            <div className="bulk-toolbar">
+                                <span className="bulk-count">{selectedIds.length} selected</span>
+                                <button className="bulk-delete-btn" onClick={onDeleteSelected}>
+                                    🗑 Delete
+                                </button>
+                            </div>
+                        )}
+                        <MailList
+                            mails={filtered}
+                            selectedIds={selectedIds}
+                            onSelect={onSelect}
+                            onMailClick={onMailClick}
+                            onDelete={onDelete}
+                        />
+                    </div>
                 }
             </div>
         </div>

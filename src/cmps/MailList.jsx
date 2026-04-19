@@ -1,7 +1,7 @@
 import React from 'react'
 import { MailPreview } from './MailPreview'
 
-export function MailList({ mails, selectedIds, onSelect, onMailClick }) {
+export function MailList({ mails, selectedIds, onSelect, onMailClick, onDelete }) {
     if (!mails.length) return <p className="mail-empty">No messages here.</p>
 
     return (
@@ -13,6 +13,7 @@ export function MailList({ mails, selectedIds, onSelect, onMailClick }) {
                     isSelected={selectedIds.includes(mail.id)}
                     onSelect={onSelect}
                     onClick={onMailClick}
+                    onDelete={onDelete}
                 />
             ))}
         </ul>

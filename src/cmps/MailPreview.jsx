@@ -1,7 +1,7 @@
 import React from 'react'
 import { mailService } from '../services/mail.service'
 
-export function MailPreview({ mail, isSelected, onSelect, onClick }) {
+export function MailPreview({ mail, isSelected, onSelect, onClick, onDelete }) {
     return (
         <li
             className={`mail-preview ${mail.isRead ? 'read' : 'unread'} ${isSelected ? 'selected' : ''}`}
@@ -20,6 +20,13 @@ export function MailPreview({ mail, isSelected, onSelect, onClick }) {
                 <span className="mail-body-preview"> &nbsp; {mail.body}</span>
             </span>
             <span className="mail-date">{mailService.formatDate(mail.date)}</span>
+            <button
+                className="mail-delete-btn"
+                title="Delete"
+                onClick={e => { e.stopPropagation(); onDelete(mail) }}
+            >
+                🗑
+            </button>
         </li>
     )
 }

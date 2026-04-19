@@ -1,12 +1,13 @@
 import React from 'react'
 import { mailService } from '../services/mail.service'
 
-export function MailDetails({ mail, onBack }) {
+export function MailDetails({ mail, onBack, onDelete }) {
     return (
         <div className="mail-details">
-            <button className="back-btn" onClick={onBack} title="Back to inbox">
-                ←
-            </button>
+            <div className="mail-details-toolbar">
+                <button className="back-btn" onClick={onBack} title="Back">←</button>
+                <button className="detail-delete-btn" onClick={() => onDelete(mail)} title="Delete">🗑</button>
+            </div>
 
             <div className="mail-details-inner">
                 <h2 className="mail-details-subject">{mail.subject}</h2>
