@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MailSidebar } from '../cmps/MailSidebar'
 import { MailList } from '../cmps/MailList'
+import { MailDetails } from '../cmps/MailDetails'
 import { mailService } from '../services/mail.service'
 
 export function MailIndex() {
@@ -9,6 +10,7 @@ export function MailIndex() {
     const [selectedIds, setSelectedIds] = useState([])
     const [searchTxt, setSearchTxt] = useState('')
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+    const [openMail, setOpenMail] = useState(null)
 
     useEffect(() => {
         loadMails()
@@ -26,8 +28,22 @@ export function MailIndex() {
 
     function onMailClick(mail) {
         if (!mail.isRead) {
-            mailService.save({ ...mail, isRead: true }).then(loadMails)
+            mailService.save({ ...mail, isRead: true }).then(() => {
+                loadMails()
+                setOpenMail({ ...mail, isRead: true })
+            })
+        } else {
+            setOpenMail(mail)
         }
+    }
+
+    function onBack() {
+        setOpenMail(null)
+    }
+
+    function onSetFolder(f) {
+        setFolder(f)
+        setOpenMail(null)
     }
 
     function onCompose() {
@@ -74,17 +90,20 @@ export function MailIndex() {
             <div className="mail-layout">
                 <MailSidebar
                     folder={folder}
-                    onSetFolder={setFolder}
+                    onSetFolder={onSetFolder}
                     unreadCount={unreadCount}
                     onCompose={onCompose}
                     collapsed={sidebarCollapsed}
                 />
-                <MailList
-                    mails={filtered}
-                    selectedIds={selectedIds}
-                    onSelect={onSelect}
-                    onMailClick={onMailClick}
-                />
+                {openMail
+                    ? <MailDetails mail={openMail} onBack={onBack} />
+                    : <MailList
+                        mails={filtered}
+                        selectedIds={selectedIds}
+                        onSelect={onSelect}
+                        onMailClick={onMailClick}
+                    />
+                }
             </div>
         </div>
     )
