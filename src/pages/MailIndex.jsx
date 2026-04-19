@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { MdOutlineMenu } from 'react-icons/md'
+import { IoSettingsOutline } from 'react-icons/io5'
 import { MailSidebar } from '../cmps/MailSidebar'
 import { MailList } from '../cmps/MailList'
 import { MailDetails } from '../cmps/MailDetails'
@@ -91,7 +93,7 @@ export function MailIndex() {
     return (
         <div className="mail-index">
             <header className="mail-header">
-                <button className="hamburger-btn" onClick={() => setSidebarCollapsed(c => !c)}>☰</button>
+                <button className="hamburger-btn" onClick={() => setSidebarCollapsed(c => !c)}><MdOutlineMenu /></button>
                 <div className="mail-logo">
                     <span className="logo-m">M</span>
                     <span className="logo-name">Mail</span>
@@ -105,7 +107,7 @@ export function MailIndex() {
                     />
                     <button className="search-filter-btn">⚙</button>
                 </div>
-                <button className="settings-btn">⚙</button>
+                <button className="settings-btn"><IoSettingsOutline /></button>
             </header>
 
             <div className="mail-layout">
