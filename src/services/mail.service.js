@@ -1,4 +1,6 @@
-const MAILS = [
+const STORAGE_KEY = 'mails_db'
+
+const DEFAULT_MAILS = [
     { id: 'm1', from: 'Udemy', subject: 'udemy', body: 'hi! its udemy', date: new Date('2023-12-17').getTime(), isRead: true, folder: 'inbox' },
     { id: 'm2', from: 'Sapporo', subject: 'Best Jewelry', body: 'sale sale sale!!!', date: new Date('2024-06-08').getTime(), isRead: false, folder: 'inbox' },
     { id: 'm3', from: 'Jewelry', subject: 'My jewelrys...', body: 'welcome our family', date: new Date('2024-09-15').getTime(), isRead: true, folder: 'inbox' },
@@ -11,13 +13,23 @@ const MAILS = [
     { id: 'm10', from: 'You', subject: 'לצפטל', body: 'לצפטל', date: new Date('2025-10-19').getTime(), isRead: false, folder: 'inbox' },
 ]
 
+function _loadFromStorage() {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) return JSON.parse(stored)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_MAILS))
+    return [...DEFAULT_MAILS]
+}
+
+function _saveToStorage(mails) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(mails))
+}
+
 function formatDate(timestamp) {
     const date = new Date(timestamp)
     const now = new Date()
-    const isThisYear = date.getFullYear() === now.getFullYear()
     const isToday = date.toDateString() === now.toDateString()
     if (isToday) return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    if (isThisYear) return date.toLocaleDateString([], { month: 'short', day: 'numeric' })
+    if (date.getFullYear() === now.getFullYear()) return date.toLocaleDateString([], { month: 'short', day: 'numeric' })
     return date.toISOString().slice(0, 10)
 }
 
@@ -31,30 +43,37 @@ export const mailService = {
 }
 
 function query(folder = 'inbox') {
-    return Promise.resolve([...MAILS].filter(m => m.folder === folder).sort((a, b) => b.date - a.date))
+    const mails = _loadFromStorage()
+    return Promise.resolve(mails.filter(m => m.folder === folder).sort((a, b) => b.date - a.date))
 }
 
 function getById(id) {
-    return Promise.resolve(MAILS.find(m => m.id === id))
+    const mails = _loadFromStorage()
+    return Promise.resolve(mails.find(m => m.id === id))
 }
 
 function save(mail) {
+    const mails = _loadFromStorage()
     if (mail.id) {
-        const idx = MAILS.findIndex(m => m.id === mail.id)
-        if (idx !== -1) MAILS[idx] = { ...MAILS[idx], ...mail }
+        const idx = mails.findIndex(m => m.id === mail.id)
+        if (idx !== -1) mails[idx] = { ...mails[idx], ...mail }
     } else {
         mail.id = 'm' + Date.now()
-        MAILS.push(mail)
+        mails.push(mail)
     }
+    _saveToStorage(mails)
     return Promise.resolve(mail)
 }
 
 function remove(id) {
-    const idx = MAILS.findIndex(m => m.id === id)
-    if (idx !== -1) MAILS.splice(idx, 1)
+    const mails = _loadFromStorage()
+    const idx = mails.findIndex(m => m.id === id)
+    if (idx !== -1) mails.splice(idx, 1)
+    _saveToStorage(mails)
     return Promise.resolve()
 }
 
 function getUnreadCount(folder = 'inbox') {
-    return MAILS.filter(m => m.folder === folder && !m.isRead).length
+    const mails = _loadFromStorage()
+    return mails.filter(m => m.folder === folder && !m.isRead).length
 }
