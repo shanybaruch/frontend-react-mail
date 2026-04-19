@@ -96,7 +96,7 @@ export function MailIndex() {
             <header className="mail-header">
                 <button className="hamburger-btn" onClick={() => setSidebarCollapsed(c => !c)}><MdOutlineMenu /></button>
                 <div className="mail-logo">
-                    <span className="logo-m">M</span>
+                    <img src="/img/mail-logo.png" alt="Mail logo" className="logo-img" />
                     <span className="logo-name">Mail</span>
                 </div>
                 <div className="search-bar">

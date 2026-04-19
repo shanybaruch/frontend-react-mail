@@ -48,18 +48,10 @@
     margin-right: 8px;
 }
 
-.logo-m {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.logo-img {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
-    background: #4285f4;
-    color: #fff;
-    font-weight: 700;
-    font-size: 18px;
-    margin-left: 4px;
+    object-fit: contain;
 }
 
 .logo-name {
