@@ -6,6 +6,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { MailSidebar } from '../cmps/MailSidebar'
 import { MailList } from '../cmps/MailList'
 import { MailDetails } from '../cmps/MailDetails'
+import { ComposeModal } from '../cmps/ComposeModal'
 import { mailService } from '../services/mail.service'
 
 export function MailIndex() {
@@ -15,6 +16,7 @@ export function MailIndex() {
     const [searchTxt, setSearchTxt] = useState('')
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
     const [openMail, setOpenMail] = useState(null)
+    const [composing, setComposing] = useState(false)
 
     useEffect(() => {
         loadMails()
@@ -72,17 +74,19 @@ export function MailIndex() {
     }
 
     function onCompose() {
-        const subject = prompt('Subject:')
-        if (!subject) return
-        const body = prompt('Message:')
+        setComposing(true)
+    }
+
+    function onSend({ to, subject, body }) {
         mailService.save({
             from: 'Me',
+            to,
             subject,
-            body: body || '',
+            body,
             date: Date.now(),
             isRead: true,
             folder: 'sent',
-        })
+        }).then(loadMails)
     }
 
     const filtered = mails.filter(m =>
@@ -142,6 +146,10 @@ export function MailIndex() {
                     </div>
                 }
             </div>
+
+            {composing && (
+                <ComposeModal onClose={() => setComposing(false)} onSend={onSend} />
+            )}
         </div>
     )
 }

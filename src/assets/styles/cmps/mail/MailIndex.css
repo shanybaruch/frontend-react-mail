@@ -1,3 +1,112 @@
+/* Compose Modal */
+.compose-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+}
+
+.compose-modal {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    width: 460px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 101;
+}
+
+.compose-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #404040;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.compose-close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 50%;
+    transition: background 0.12s;
+}
+
+.compose-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.compose-modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.compose-field {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0 16px;
+}
+
+.compose-field label {
+    font-size: 13px;
+    color: #5f6368;
+    min-width: 52px;
+}
+
+.compose-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 12px 0;
+    color: #202124;
+    background: transparent;
+}
+
+.compose-body {
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    color: #202124;
+    padding: 16px;
+    min-height: 200px;
+    font-family: inherit;
+}
+
+.compose-modal-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.compose-send-btn {
+    background: #0b57d0;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.compose-send-btn:hover {
+    background: #0842a0;
+}
+
 /* Mail App Layout */
 .mail-index {
     display: flex;
