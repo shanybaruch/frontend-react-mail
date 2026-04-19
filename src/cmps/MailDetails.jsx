@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { mailService } from '../services/mail.service'
 
 export function MailDetails({ mail, onBack, onDelete }) {
@@ -6,7 +7,7 @@ export function MailDetails({ mail, onBack, onDelete }) {
         <div className="mail-details">
             <div className="mail-details-toolbar">
                 <button className="back-btn" onClick={onBack} title="Back">←</button>
-                <button className="detail-delete-btn" onClick={() => onDelete(mail)} title="Delete">🗑</button>
+                <button className="detail-delete-btn" onClick={() => onDelete(mail)} title="Delete"><FaRegTrashAlt /></button>
             </div>
 
             <div className="mail-details-inner">

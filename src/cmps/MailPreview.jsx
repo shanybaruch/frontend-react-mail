@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { mailService } from '../services/mail.service'
 
 export function MailPreview({ mail, isSelected, onSelect, onClick, onDelete }) {
@@ -25,7 +26,7 @@ export function MailPreview({ mail, isSelected, onSelect, onClick, onDelete }) {
                 title="Delete"
                 onClick={e => { e.stopPropagation(); onDelete(mail) }}
             >
-                🗑
+                <FaRegTrashAlt />
             </button>
         </li>
     )

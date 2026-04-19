@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
 import { IoSettingsOutline } from 'react-icons/io5'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { MailSidebar } from '../cmps/MailSidebar'
 import { MailList } from '../cmps/MailList'
 import { MailDetails } from '../cmps/MailDetails'
@@ -125,7 +126,7 @@ export function MailIndex() {
                             <div className="bulk-toolbar">
                                 <span className="bulk-count">{selectedIds.length} selected</span>
                                 <button className="bulk-delete-btn" onClick={onDeleteSelected}>
-                                    🗑 Delete
+                                    <FaRegTrashAlt /> Delete
                                 </button>
                             </div>
                         )}

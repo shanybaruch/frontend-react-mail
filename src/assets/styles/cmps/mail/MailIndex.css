@@ -532,6 +532,7 @@
     opacity: 0;
     transition: opacity 0.15s, background 0.12s;
     flex-shrink: 0;
+    color: gray;
 }
 
 .mail-preview:hover .mail-delete-btn {
