@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function MailSidebar({ folder, onSetFolder, unreadCount, onCompose }) {
+export function MailSidebar({ folder, onSetFolder, unreadCount, onCompose, collapsed }) {
     const folders = [
         { name: 'inbox', label: 'Inbox', icon: '📥' },
         { name: 'sent', label: 'Sent', icon: '📤' },
@@ -9,8 +9,8 @@ export function MailSidebar({ folder, onSetFolder, unreadCount, onCompose }) {
     ]
 
     return (
-        <aside className="mail-sidebar">
-            <button className="compose-btn" onClick={onCompose}>
+        <aside className={`mail-sidebar ${collapsed ? 'collapsed' : ''}`}>
+            <button className="compose-btn" onClick={onCompose} title="Compose">
                 <span className="compose-icon">✏</span>
                 <span className="compose-label">Compose</span>
             </button>
@@ -20,6 +20,7 @@ export function MailSidebar({ folder, onSetFolder, unreadCount, onCompose }) {
                         key={f.name}
                         className={`folder-item ${folder === f.name ? 'active' : ''}`}
                         onClick={() => onSetFolder(f.name)}
+                        title={f.label}
                     >
                         <span className="folder-icon">{f.icon}</span>
                         <span className="folder-label">{f.label}</span>

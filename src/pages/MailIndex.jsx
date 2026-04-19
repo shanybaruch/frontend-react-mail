@@ -8,6 +8,7 @@ export function MailIndex() {
     const [folder, setFolder] = useState('inbox')
     const [selectedIds, setSelectedIds] = useState([])
     const [searchTxt, setSearchTxt] = useState('')
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
     useEffect(() => {
         loadMails()
@@ -53,7 +54,7 @@ export function MailIndex() {
     return (
         <div className="mail-index">
             <header className="mail-header">
-                <button className="hamburger-btn">☰</button>
+                <button className="hamburger-btn" onClick={() => setSidebarCollapsed(c => !c)}>☰</button>
                 <div className="mail-logo">
                     <span className="logo-m">M</span>
                     <span className="logo-name">Mail</span>
@@ -76,6 +77,7 @@ export function MailIndex() {
                     onSetFolder={setFolder}
                     unreadCount={unreadCount}
                     onCompose={onCompose}
+                    collapsed={sidebarCollapsed}
                 />
                 <MailList
                     mails={filtered}

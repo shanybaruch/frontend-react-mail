@@ -140,11 +140,20 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    overflow: hidden;
+    transition: width 0.25s ease-in-out, min-width 0.25s ease-in-out;
 }
 
+.mail-sidebar.collapsed {
+    width: 72px;
+    min-width: 72px;
+}
+
+/* Compose button */
 .compose-btn {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
     background: #c2e7ff;
     border: none;
@@ -155,27 +164,49 @@
     font-size: 14px;
     font-weight: 500;
     color: #001d35;
-    transition: background 0.15s, box-shadow 0.15s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: background 0.15s, box-shadow 0.15s, padding 0.25s ease-in-out, margin 0.25s ease-in-out, width 0.25s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .compose-btn:hover {
     background: #a8d8f8;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.mail-sidebar.collapsed .compose-btn {
+    justify-content: center;
+    padding: 18px 0;
+    margin: 8px 8px 12px;
+    gap: 0;
 }
 
 .compose-icon {
     font-size: 20px;
+    flex-shrink: 0;
 }
 
 .compose-label {
     font-size: 14px;
     font-weight: 500;
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+    overflow: hidden;
 }
 
+.mail-sidebar.collapsed .compose-label {
+    opacity: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+/* Folder nav */
 .folder-nav {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2px;
     padding: 0 8px;
 }
@@ -183,6 +214,7 @@
 .folder-item {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
     padding: 8px 16px;
     border: none;
@@ -193,9 +225,18 @@
     color: #202124;
     width: 100%;
     text-align: left;
-    transition: background 0.12s;
+    transition: background 0.12s, border-radius 0.25s ease-in-out, justify-content 0.25s ease-in-out, gap 0.25s ease-in-out, padding 0.25s ease-in-out;
     font-weight: 400;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mail-sidebar.collapsed .folder-item {
+    justify-content: center;
+    gap: 0;
+    padding: 8px 0;
+    border-radius: 16px;
 }
 
 .folder-item:hover {
@@ -209,10 +250,21 @@
 
 .folder-icon {
     font-size: 16px;
+    flex-shrink: 0;
 }
 
 .folder-label {
     flex: 1;
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+    overflow: hidden;
+}
+
+.mail-sidebar.collapsed .folder-label {
+    opacity: 0;
+    width: 0;
+    flex: 0;
+    pointer-events: none;
 }
 
 .unread-badge {
@@ -220,7 +272,16 @@
     color: #202124;
     font-size: 13px;
     font-weight: 700;
-    margin-left: auto;
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+    flex-shrink: 0;
+}
+
+.mail-sidebar.collapsed .unread-badge {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 /* Mail List */
@@ -256,7 +317,7 @@
 
 .mail-preview:hover {
     background: #f2f6fc;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
 }
 
 .mail-preview.selected {
@@ -313,6 +374,10 @@
 
 .mail-preview.unread {
     background: #fff;
+}
+
+.mail-preview.read {
+    background: #f1f3f4;
 }
 
 .mail-preview.read .mail-from,
