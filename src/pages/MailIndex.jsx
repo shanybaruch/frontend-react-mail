@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { MdOutlineMenu } from 'react-icons/md'
+import { MdOutlineMenu, MdRefresh } from 'react-icons/md'
 import { IoSearchOutline } from 'react-icons/io5'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { FaRegTrashAlt } from 'react-icons/fa'
@@ -128,6 +128,11 @@ export function MailIndex() {
                 {openMail
                     ? <MailDetails mail={openMail} onBack={onBack} onDelete={onDelete} />
                     : <div className="mail-list-container">
+                        <div className="mail-toolbar">
+                            <button className="toolbar-btn" onClick={loadMails} title="Refresh">
+                                <MdRefresh />
+                            </button>
+                        </div>
                         {selectedIds.length > 0 && (
                             <div className="bulk-toolbar">
                                 <span className="bulk-count">{selectedIds.length} selected</span>
