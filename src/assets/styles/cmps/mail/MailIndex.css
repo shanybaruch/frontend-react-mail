@@ -73,6 +73,12 @@
     gap: 8px;
 }
 
+.search-icon {
+    font-size: 20px;
+    color: #444746;
+    flex-shrink: 0;
+}
+
 .search-bar input {
     flex: 1;
     border: none;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
+import { IoSearchOutline } from 'react-icons/io5'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { MailSidebar } from '../cmps/MailSidebar'
@@ -100,6 +101,7 @@ export function MailIndex() {
                     <span className="logo-name">Mail</span>
                 </div>
                 <div className="search-bar">
+                    <IoSearchOutline className="search-icon" />
                     <input
                         type="text"
                         placeholder="Search mail"
