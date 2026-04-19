@@ -27,10 +27,9 @@ function _saveToStorage(mails) {
 function formatDate(timestamp) {
     const date = new Date(timestamp)
     const now = new Date()
-    const isToday = date.toDateString() === now.toDateString()
-    if (isToday) return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    if (date.getFullYear() === now.getFullYear()) return date.toLocaleDateString([], { month: 'short', day: 'numeric' })
-    return date.toISOString().slice(0, 10)
+    if (date.toDateString() === now.toDateString())
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
 export const mailService = {
