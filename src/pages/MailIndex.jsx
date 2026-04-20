@@ -151,6 +151,7 @@ export function MailIndex() {
                         />
                     </div>
                 }
+                <aside className="mail-right-sidebar"></aside>
             </div>
 
             {composing && (
