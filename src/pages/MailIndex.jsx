@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { MdOutlineMenu, MdRefresh } from 'react-icons/md'
+import { IoMdOptions } from 'react-icons/io'
 import { IoSearchOutline } from 'react-icons/io5'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { FaRegTrashAlt } from 'react-icons/fa'
@@ -105,14 +106,14 @@ export function MailIndex() {
                     <span className="logo-name">Mail</span>
                 </div>
                 <div className="search-bar">
-                    <IoSearchOutline className="search-icon" />
+                    <button className="search-icon-btn"><IoSearchOutline className="search-icon" /></button>
                     <input
                         type="text"
                         placeholder="Search mail"
                         value={searchTxt}
                         onChange={e => setSearchTxt(e.target.value)}
                     />
-                    <button className="search-filter-btn">⚙</button>
+                    <button className="search-filter-btn"><IoMdOptions /></button>
                 </div>
                 <button className="settings-btn"><IoSettingsOutline /></button>
             </header>
