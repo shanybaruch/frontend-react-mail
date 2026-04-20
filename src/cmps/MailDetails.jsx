@@ -13,19 +13,19 @@ export function MailDetails({ mail, onBack, onDelete }) {
 
             <div className="mail-details-inner">
                 <h2 className="mail-details-subject">{mail.subject}</h2>
-
-                <div className="mail-details-meta">
+                <div className="mail-details-meta-row">
                     <div className="mail-details-avatar">
                         {mail.from.charAt(0).toUpperCase()}
                     </div>
-                    <div className="mail-details-from-block">
-                        <span className="mail-details-from">{mail.from}</span>
-                        <span className="mail-details-date">{mailService.formatDate(mail.date)}</span>
+                    <div className="mail-details-content">
+                        <div className="mail-details-from-block">
+                            <span className="mail-details-from">{mail.from}</span>
+                            <span className="mail-details-date">{mailService.formatDate(mail.date)}</span>
+                        </div>
+                        <div className="mail-details-body">
+                            {mail.body}
+                        </div>
                     </div>
-                </div>
-
-                <div className="mail-details-body">
-                    {mail.body}
                 </div>
             </div>
         </div>
